@@ -12,6 +12,44 @@
     input, button { width: 100%; margin: 0.75rem 0; padding: 0.75rem; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem; }
     button { background: #2f80ed; color: white; font-weight: bold; border: none; cursor: pointer; }
   </style>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDmU19Vd3w0NItLZqiB2kIYh36A9B1yrLY",
+    authDomain: "botrise-studio.firebaseapp.com",
+    projectId: "botrise-studio",
+    storageBucket: "botrise-studio.firebasestorage.app",
+    messagingSenderId: "100898425563",
+    appId: "1:100898425563:web:a62b31ef62631ee6129afe"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.signup = function () {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        alert("Signup successful!");
+        window.location.href = "login.html";
+      })
+      .catch(error => alert(error.message));
+  }
+
+  window.login = function () {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        alert("Login successful!");
+        window.location.href = "order.html";
+      })
+      .catch(error => alert("Login failed: " + error.message));
+  }
+</script>
 </head>
 <body>
   <header>Sign Up</header>
